@@ -119,7 +119,7 @@ const LeftNavbar = () => {
                 <span className="text_heading">Incomplete Users</span>
               </li>
             </Link>
-            <Link href="/Changesusers">
+            <Link href="/totaluser">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/totaluser" ? "active" : ""
