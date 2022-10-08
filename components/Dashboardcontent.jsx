@@ -19,6 +19,7 @@ function Dashboardcontent() {
             <h1 className="heading">Changed made by Users</h1>
             <h5 className="sub_heading">35</h5>
           </div>
+
           <div className=" box_one">
             <h1 className="heading">Manually added Products</h1>
             <h5 className="sub_heading">0</h5>

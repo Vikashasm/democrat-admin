@@ -136,6 +136,16 @@ const LeftNavbar = () => {
                 }`}
               >
                 <Addproduct />
+                <span className="text_heading">Manage Product</span>
+              </li>
+            </Link>
+            <Link href="/Products">
+              <li
+                className={`Dashboard_text pb_2 ${
+                  router.pathname == "/Products" ? "active" : ""
+                }`}
+              >
+                <Addproduct />
                 <span className="text_heading">Manually added Products</span>
               </li>
             </Link>
