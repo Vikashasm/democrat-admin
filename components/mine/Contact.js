@@ -16,14 +16,8 @@ const Contactt = ({ contact }) => {
     axios
       .get("https://medicare-application.herokuapp.com/api/v1/admin/contacts", {
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers":
-            "Access-Control-Allow-Headers, Content-Type, token",
-          "Access-Control-Allow-Methods": "*",
-
           "Content-Type": "application/json; charset=utf-8",
-
-          "x-api-key":
+          token:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQxNTQ1YjIxNzM4NjY3YzJkOWExMWUiLCJpZCI6MjcsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsInByb2ZpbGVJZCI6IjUwZDljY2UwYTMyNzE1MDUyNGJlMzcyN2E2NGQyZiIsImlhdCI6MTY2NTIyNTg0MCwiZXhwIjoxNjY3ODE3ODQwfQ.25de1Uu3o6Jf5WIEtsftl4PU_NUANaJ1Ya6su0JFRIAs",
         },
       })
