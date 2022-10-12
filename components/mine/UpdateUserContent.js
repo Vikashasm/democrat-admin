@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Row, Col, Container, Card, Table, Alert } from "react-bootstrap";
 // import { FontAwesomeIcon } from "@fontawesome/react-fontawesome";
 // import { faTrash } from "@fontawesome/free-solid-svg-icons";
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteConfirmation from "../DeleteConfirmation";
 
-function Usercontent() {
+const UpdateUserContent = () => {
+  // Set up a list of fruits and vegetables
   const [fruits, setFruits] = useState([
     {
       id: 1,
@@ -127,7 +128,7 @@ function Usercontent() {
       <Row>
         <Col className="width_left_margin" md={{ span: 10, offset: 1 }}>
           <Card className="mt-2">
-            <Card.Header className="card_header">Approved User</Card.Header>
+            <Card.Header className="card_header">Update User</Card.Header>
             <Card.Body>
               {fruitMessage && <Alert variant="success">{fruitMessage}</Alert>}
               <Table striped bordered hover size="sm">
@@ -232,6 +233,6 @@ function Usercontent() {
       />
     </Container>
   );
-}
+};
 
-export default Usercontent;
+export default UpdateUserContent;

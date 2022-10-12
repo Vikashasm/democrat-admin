@@ -119,17 +119,17 @@ const LeftNavbar = () => {
                 <span className="text_heading">Incomplete Users</span>
               </li>
             </Link>
-            <Link href="/totaluser">
+            <Link href="/updateduser">
               <li
                 className={`Dashboard_text pb_2 ${
-                  router.pathname == "/totaluser" ? "active" : ""
+                  router.pathname == "/updateduser" ? "active" : ""
                 }`}
               >
                 <Changesusers />
                 <span className="text_heading">Changes made by Users</span>
               </li>
             </Link>
-            <Link href="/Products">
+            <Link href="/products">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/Products" ? "active" : ""
@@ -149,7 +149,7 @@ const LeftNavbar = () => {
                 <span className="text_heading">Manually added Products</span>
               </li>
             </Link>
-            <Link href="/Comments">
+            <Link href="/comments">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/Comments" ? "active" : ""
@@ -159,7 +159,7 @@ const LeftNavbar = () => {
                 <span className="text_heading">Comments approval</span>
               </li>
             </Link>
-            <Link href="/Contact">
+            <Link href="/contact">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/Contact" ? "active" : ""
@@ -169,7 +169,7 @@ const LeftNavbar = () => {
                 <span className="text_heading">Contact Requests</span>
               </li>
             </Link>
-            <Link href="/Deleteusers">
+            <Link href="/deleteusers">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/Deleteusers" ? "active" : ""
