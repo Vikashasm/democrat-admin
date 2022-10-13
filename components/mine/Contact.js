@@ -25,12 +25,13 @@ const Contactt = ({ contact }) => {
       document.removeEventListener("mousedown", handler);
     };
   }, [contact]);
+  const date = new Date(contact.createdAt).toDateString();
 
   return (
     <>
       <td>{contact.email} </td>
       <td>{contact.description}</td>
-      <td>{contact.date}</td>
+      <td>{date}</td>
       <td>
         {contact.contactImagePath != "" ? (
           <img

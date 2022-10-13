@@ -129,7 +129,7 @@ const LeftNavbar = () => {
                 <span className="text_heading">Changes made by Users</span>
               </li>
             </Link>
-            <Link href="/Products">
+            <Link href="/allproducts">
               <li
                 className={`Dashboard_text pb_2 ${
                   router.pathname == "/Products" ? "active" : ""

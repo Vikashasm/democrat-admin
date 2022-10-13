@@ -18,7 +18,7 @@ const ContactList = () => {
   //const handleShowAlert = () =>setShowAlert(true);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [contactsPerPage] = useState(2);
+  const [contactsPerPage] = useState(10);
 
   const handleShowAlert = () => {
     setShowAlert(true);

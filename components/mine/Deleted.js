@@ -93,6 +93,7 @@ const Deleted = ({ deleted, ind }) => {
       resReq();
     }
   };
+  const date = new Date(deleted.createdAt).toDateString();
 
   useEffect(() => {}, [deleted]);
 
@@ -101,7 +102,7 @@ const Deleted = ({ deleted, ind }) => {
       <td>{ind} </td>
       <td>{deleted.id} </td>
       <td>{deleted.reason}</td>
-      <td>{deleted.date}</td>
+      <td>{date}</td>
 
       <td>
         <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Edit</Tooltip>}>

@@ -5,10 +5,9 @@ import Employee from "./Employee";
 import AddForm from "./AddForm";
 import Pagination from "./Pagination";
 
-const EmployeeList = () => {
-  const { sortedIncompleteUser, deleteSortedInUsers } =
-    useContext(EmployeeContext);
-
+const UpdatedEmployeeList = () => {
+  const { sortedUpdatedUsers } = useContext(EmployeeContext);
+  console.log(sortedUpdatedUsers);
   const [showAlert, setShowAlert] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -33,17 +32,15 @@ const EmployeeList = () => {
     return () => {
       handleShowAlert();
     };
-  }, [sortedIncompleteUser]);
+  }, [sortedUpdatedUsers]);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = sortedIncompleteUser.slice(
+  const currentEmployees = sortedUpdatedUsers.slice(
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
-  const totalPagesNum = Math.ceil(
-    sortedIncompleteUser.length / employeesPerPage
-  );
+  const totalPagesNum = Math.ceil(sortedUpdatedUsers.length / employeesPerPage);
 
   return (
     <>
@@ -51,7 +48,7 @@ const EmployeeList = () => {
         <div className="row">
           <div className="col-sm-6">
             <h2>
-              Incomplete <b>Users</b>
+              Changes made by <b>Users</b>
             </h2>
           </div>
           {
@@ -97,7 +94,7 @@ const EmployeeList = () => {
         pages={totalPagesNum}
         setCurrentPage={setCurrentPage}
         currentEmployees={currentEmployees}
-        sortedEmployees={sortedIncompleteUser}
+        sortedEmployees={sortedUpdatedUsers}
       />
       {
         //     <Modal show={show} onHide={handleClose}>
@@ -118,4 +115,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default UpdatedEmployeeList;

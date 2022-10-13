@@ -18,7 +18,7 @@ const ProductList = () => {
   //const handleShowAlert = () =>setShowAlert(true);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(2);
+  const [productsPerPage] = useState(10);
 
   const handleShowAlert = () => {
     setShowAlert(true);

@@ -18,7 +18,7 @@ const DeletedList = () => {
   //const handleShowAlert = () =>setShowAlert(true);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [deletedsPerPage] = useState(2);
+  const [deletedsPerPage] = useState(10);
 
   const handleShowAlert = () => {
     setShowAlert(true);

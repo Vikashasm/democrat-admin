@@ -45,7 +45,11 @@ const Productt = ({ product }) => {
 
       <td>
         <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Read</Tooltip>}>
-          <Button variant="primary" style={{ width: "80%" }}>
+          <Button
+            variant="primary"
+            style={{ width: "80%" }}
+            onClick={() => deleteProduct(product.id)}
+          >
             Read
           </Button>
         </OverlayTrigger>
@@ -69,8 +73,12 @@ const Productt = ({ product }) => {
         style={{
           display: imgVisible ? "block" : "none",
           position: "absolute",
+          width: "100vw",
+          height: "100vh",
           zIndex: "30",
-          right: "40%",
+          top: "0",
+          left: "0",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
         }}
       >
         <img
@@ -78,6 +86,10 @@ const Productt = ({ product }) => {
           src={product.productImagePath}
           width={600}
           height={500}
+          style={{
+            marginLeft: "40%",
+            marginTop: "10%",
+          }}
         />
       </div>
     </>

@@ -7,6 +7,7 @@ const EmployeeContextProvider = (props) => {
   const [employees, setEmployees] = useState([]);
   const [sortedUsers, setsortedUsers] = useState([]);
   const [sortedIncompleteUser, setsortedIncompleteUser] = useState([]);
+  const [sortedUpdatedUsers, setsortedUpdatedUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -38,8 +39,17 @@ const EmployeeContextProvider = (props) => {
       );
       setsortedIncompleteUser(sortingInUsers);
     };
+    const sortedUpdatedUsersFn = () => {
+      if (sortedUsers.length > 1) {
+        const sortingUdatedUser = sortedUsers.filter(
+          (user) => user.createdAt != user.updatedAt
+        );
+        setsortedUpdatedUsers(sortingUdatedUser);
+      }
+    };
     sortedUsersFn();
     sortedIncompleteUserFn();
+    sortedUpdatedUsersFn();
   }, [employees]);
 
   const addEmployee = (name, email, address, phone) => {
@@ -50,7 +60,6 @@ const EmployeeContextProvider = (props) => {
     console.log("way to delete", id);
     const deletingUser = sortedUsers.filter((employee) => employee.id != id);
     setsortedUsers(deletingUser);
-    console.log(sortedUsers);
   };
   const deleteSortedInUsers = (id) => {
     console.log("way to delete", id);
@@ -58,7 +67,6 @@ const EmployeeContextProvider = (props) => {
       (employee) => employee.id != id
     );
     setsortedIncompleteUser(deletingUser);
-    console.log(sortedIncompleteUser);
   };
 
   const updateEmployee = (id, updatedEmployee) => {
@@ -74,6 +82,7 @@ const EmployeeContextProvider = (props) => {
       value={{
         sortedIncompleteUser,
         sortedUsers,
+        sortedUpdatedUsers,
         addEmployee,
         deleteSortedUsers,
         deleteSortedInUsers,
