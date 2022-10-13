@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { ContactContext } from "../context/ContactContext";
 import { Modal, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import EditForm from "../EditFrom";
@@ -6,24 +6,24 @@ import axios from "axios";
 
 const Contactt = ({ contact }) => {
   const { deleteContact } = useContext(ContactContext);
-
+  const imgRef = useRef(null);
+  const [imgVisible, setimgVisible] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-
   useEffect(() => {
-    axios
-      .get("https://medicare-application.herokuapp.com/api/v1/admin/contacts", {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQxNTQ1YjIxNzM4NjY3YzJkOWExMWUiLCJpZCI6MjcsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsInByb2ZpbGVJZCI6IjUwZDljY2UwYTMyNzE1MDUyNGJlMzcyN2E2NGQyZiIsImlhdCI6MTY2NTIyNTg0MCwiZXhwIjoxNjY3ODE3ODQwfQ.25de1Uu3o6Jf5WIEtsftl4PU_NUANaJ1Ya6su0JFRIAs",
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    console.log(imgRef);
+    let handler = (e) => {
+      if (!imgRef.current.contains(e.target)) {
+        setimgVisible(false);
+      }
+    };
     handleClose();
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   }, [contact]);
 
   return (
@@ -31,26 +31,33 @@ const Contactt = ({ contact }) => {
       <td>{contact.email} </td>
       <td>{contact.description}</td>
       <td>{contact.date}</td>
-      <td>{contact.pic != "" ? contact.pic : "NA"}</td>
+      <td>
+        {contact.contactImagePath != "" ? (
+          <img
+            ref={imgRef}
+            src={contact.contactImagePath}
+            width={40}
+            height={40}
+            onClick={() => setimgVisible(true)}
+          />
+        ) : (
+          "NA"
+        )}
+      </td>
 
       <td>
         <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Edit</Tooltip>}>
-          <button
-            onClick={handleShow}
-            className="btn text-warning btn-act"
-            data-toggle="modal"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-hand-thumbs-up-fill"
+            viewBox="0 0 16 16"
+            fontSize="40px"
           >
-            <i className="material-icons">&#xE254;</i>
-          </button>
-        </OverlayTrigger>
-        <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Delete</Tooltip>}>
-          <button
-            onClick={() => deleteContact(contact.id)}
-            className="btn text-danger btn-act"
-            data-toggle="modal"
-          >
-            <i className="material-icons">&#xE872;</i>
-          </button>
+            <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+          </svg>
         </OverlayTrigger>
       </td>
 
@@ -67,6 +74,21 @@ const Contactt = ({ contact }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <div
+        style={{
+          display: imgVisible ? "block" : "none",
+          position: "absolute",
+          zIndex: "30",
+          right: "40%",
+        }}
+      >
+        <img
+          ref={imgRef}
+          src={contact.contactImagePath}
+          width={600}
+          height={500}
+        />
+      </div>
     </>
   );
 };

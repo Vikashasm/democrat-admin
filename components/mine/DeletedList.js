@@ -84,20 +84,6 @@ const DeletedList = () => {
         currentEmployees={currentDeleteds}
         sortedEmployees={sortedDeleteds}
       />
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Deleted</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddForm />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close Button
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };

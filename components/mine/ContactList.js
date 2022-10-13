@@ -52,23 +52,26 @@ const ContactList = () => {
               Manage <b>Contacts</b>
             </h2>
           </div>
-          <div className="col-sm-6">
-            <Button
-              onClick={handleShow}
-              className="btn btn-success"
-              data-toggle="modal"
-            >
-              <i className="material-icons">&#xE147;</i>{" "}
-              <span>Add New Contact</span>
-            </Button>
-          </div>
+          {
+            // <div className="col-sm-6">
+            //   <Button
+            //     onClick={handleShow}
+            //     className="btn btn-success"
+            //     data-toggle="modal"
+            //   >
+            //     <i className="material-icons">&#xE147;</i>{" "}
+            //     <span>Add New Contact</span>
+            //   </Button>
+            // </div>
+          }
         </div>
       </div>
 
-      <Alert show={showAlert} variant="success">
-        Contacts List Updated Succefully!
-      </Alert>
-
+      {
+        // <Alert show={showAlert} variant="success">
+        //   Contacts List Updated Succefully!
+        // </Alert>
+      }
       <table className="table table-striped table-hover">
         <thead>
           <tr>
@@ -94,20 +97,21 @@ const ContactList = () => {
         currentEmployees={currentContacts}
         sortedEmployees={sortedContacts}
       />
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Contact</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddForm />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close Button
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {
+        //  <Modal show={show} onHide={handleClose}>
+        //    <Modal.Header closeButton>
+        //      <Modal.Title>Add Contact</Modal.Title>
+        //    </Modal.Header>
+        //    <Modal.Body>
+        //      <AddForm />
+        //    </Modal.Body>
+        //    <Modal.Footer>
+        //      <Button variant="secondary" onClick={handleClose}>
+        //        Close Button
+        //      </Button>
+        //    </Modal.Footer>
+        //  </Modal>
+      }
     </>
   );
 };

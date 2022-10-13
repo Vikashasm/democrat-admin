@@ -6,7 +6,8 @@ import AddForm from "./AddForm";
 import Pagination from "./Pagination";
 
 const EmployeeList = () => {
-  const { sortedEmployees } = useContext(EmployeeContext);
+  const { sortedIncompleteUser, deleteSortedInUsers } =
+    useContext(EmployeeContext);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -32,15 +33,17 @@ const EmployeeList = () => {
     return () => {
       handleShowAlert();
     };
-  }, [sortedEmployees]);
+  }, [sortedIncompleteUser]);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = sortedEmployees.slice(
+  const currentEmployees = sortedIncompleteUser.slice(
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
-  const totalPagesNum = Math.ceil(sortedEmployees.length / employeesPerPage);
+  const totalPagesNum = Math.ceil(
+    sortedIncompleteUser.length / employeesPerPage
+  );
 
   return (
     <>
@@ -51,37 +54,40 @@ const EmployeeList = () => {
               Incomplete <b>Users</b>
             </h2>
           </div>
-          <div className="col-sm-6">
-            <Button
-              onClick={handleShow}
-              className="btn btn-success"
-              data-toggle="modal"
-            >
-              <i className="material-icons">&#xE147;</i>{" "}
-              <span>Add New Employee</span>
-            </Button>
-          </div>
+          {
+            //<div className="col-sm-6">
+            //  <Button
+            //    onClick={handleShow}
+            //    className="btn btn-success"
+            //    data-toggle="modal"
+            //  >
+            //    <i className="material-icons">&#xE147;</i>{" "}
+            //    <span>Add New Employee</span>
+            //  </Button>
+            //</div>
+          }
         </div>
       </div>
 
-      <Alert show={showAlert} variant="success">
-        Emlployee List Updated Succefully!
-      </Alert>
+      {
+        //  <Alert show={showAlert} variant="success">
+        //  Emlployee List Updated Succefully!
+        //</Alert>
+      }
 
       <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Address</th>
             <th>Phone</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentEmployees.map((employee) => (
+          {currentEmployees.map((employee, ind) => (
             <tr key={employee.id}>
-              <Employee employee={employee} />
+              <Employee employee={employee} ind={ind} />
             </tr>
           ))}
         </tbody>
@@ -91,22 +97,23 @@ const EmployeeList = () => {
         pages={totalPagesNum}
         setCurrentPage={setCurrentPage}
         currentEmployees={currentEmployees}
-        sortedEmployees={sortedEmployees}
+        sortedEmployees={sortedIncompleteUser}
       />
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Employee</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddForm />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close Button
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {
+        //     <Modal show={show} onHide={handleClose}>
+        //       <Modal.Header closeButton>
+        //         <Modal.Title>Add Employee</Modal.Title>
+        //       </Modal.Header>
+        //       <Modal.Body>
+        //         <AddForm />
+        //       </Modal.Body>
+        //       <Modal.Footer>
+        //         <Button variant="secondary" onClick={handleClose}>
+        //           Close Button
+        //         </Button>
+        //       </Modal.Footer>
+        //     </Modal>
+      }
     </>
   );
 };

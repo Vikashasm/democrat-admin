@@ -1,33 +1,33 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const DeleteConfirmation = ({
+const RestoreConfirmation = ({
   showModal,
   hideModal,
   confirmModal,
   id,
-  type,
   message,
+  type,
   ind,
 }) => {
   return (
     <Modal show={showModal} onHide={hideModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Delete Confirmation</Modal.Title>
+        <Modal.Title>Restore Confirmation</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="alert alert-danger">{message}</div>
+        <div className="alert alert-primary">{message}</div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="default" onClick={hideModal}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={() => confirmModal(type, ind, id)}>
-          Delete
+        <Button variant="primary" onClick={() => confirmModal(type, ind, id)}>
+          Restore
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default DeleteConfirmation;
+export default RestoreConfirmation;

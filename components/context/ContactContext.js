@@ -5,34 +5,27 @@ import axios from "axios";
 export const ContactContext = createContext();
 
 const ContactContextProvider = (props) => {
-  const [contacts, setContacts] = useState([
-    {
-      email: "@gmail.com",
-      description: "Medication not working",
-      date: "Capsules",
-      pic: "",
-    },
-    {
-      email: "@yahoo.com",
-      description: "you should die",
-      date: "Capsules",
-      pic: "Cat",
-    },
-    {
-      email: "@nobody.com",
-      description: "Medication are working Thanks",
-      date: "Capsules",
-      pic: "Dog",
-    },
-  ]);
+  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    setContacts(JSON.parse(localStorage.getItem("contacts")));
+    axios
+      .get("https://medicare-application.herokuapp.com/api/v1/admin/contacts", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.contacts);
+        setContacts(res.data.contacts);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  });
+  //useEffect(() => {
+  //  localStorage.setItem("contacts", JSON.stringify(contacts));
+  //});
 
   const sortedContacts = contacts.sort((a, b) => (a.name < b.name ? -1 : 1));
 

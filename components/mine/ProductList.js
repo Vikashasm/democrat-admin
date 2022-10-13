@@ -8,7 +8,7 @@ import Pagination from "../Pagination";
 
 const ProductList = () => {
   const { sortedProducts } = useContext(ProductContext);
-
+  console.log(sortedProducts);
   const [showAlert, setShowAlert] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -52,23 +52,25 @@ const ProductList = () => {
               Manage <b>Products</b>
             </h2>
           </div>
-          <div className="col-sm-6">
-            <Button
-              onClick={handleShow}
-              className="btn btn-success"
-              data-toggle="modal"
-            >
-              <i className="material-icons">&#xE147;</i>{" "}
-              <span>Add New Product</span>
-            </Button>
-          </div>
+          {
+            //<div className="col-sm-6">
+            //  <Button
+            //    onClick={handleShow}
+            //    className="btn btn-success"
+            //    data-toggle="modal"
+            //  >
+            //    <i className="material-icons">&#xE147;</i>{" "}
+            //    <span>Add New Product</span>
+            //  </Button>
+            //</div>
+          }
         </div>
       </div>
-
-      <Alert show={showAlert} variant="success">
-        Products List Updated Succefully!
-      </Alert>
-
+      {
+        // <Alert show={showAlert} variant="success">
+        //   Products List Updated Succefully!
+        // </Alert>
+      }
       <table className="table table-striped table-hover">
         <thead>
           <tr>

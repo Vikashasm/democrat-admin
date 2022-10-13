@@ -1,42 +1,32 @@
 import React from "react";
 import { createContext, useEffect, useState } from "react";
-
+import axios from "axios";
 export const ProductContext = createContext();
 
 const ProductContextProvider = (props) => {
-  const [products, setProducts] = useState([
-    {
-      brand: "Now foods",
-      name: "Vitamin B12",
-      category: "Medication",
-      form: "Capsules",
-      pic: "",
-    },
-    {
-      brand: "Now foods",
-      name: "Vitamin B12",
-      category: "Medication",
-      form: "Capsules",
-      pic: "",
-    },
-    {
-      brand: "Now foods",
-      name: "Vitamin B12",
-      category: "Medication",
-      form: "Capsules",
-      pic: "",
-    },
-  ]);
-
+  const [products, setProducts] = useState([]);
+  console.log(products);
   useEffect(() => {
-    setProducts(JSON.parse(localStorage.getItem("products")));
+    axios
+      .get(
+        "https://medicare-application.herokuapp.com/api/v1/admin/user/products",
+        {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
+          },
+        }
+      )
+      .then((res) => {
+        setProducts(res.data.products);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  });
-
-  const sortedProducts = products.sort((a, b) => (a.name < b.name ? -1 : 1));
+  const sortedProducts = products.sort((a, b) =>
+    a.productName < b.productName ? -1 : 1
+  );
 
   const addProduct = (brand, name, category, form, pic) => {
     setProducts([

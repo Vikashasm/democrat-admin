@@ -1,57 +1,64 @@
 import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 export const EmployeeContext = createContext();
 
 const EmployeeContextProvider = (props) => {
-  const [employees, setEmployees] = useState([
-    {
-      name: "Thomas Hardy10",
-      email: "thomashardy@mail.com",
-      address: "89 Chiaroscuro Rd, Portland, USA",
-      phone: "(171) 555-2222",
-    },
-    {
-      name: "Dominique Perrier",
-      email: "dominiqueperrier@mail.com",
-      address: "Obere Str. 57, Berlin, Germany",
-      phone: "(313) 555-5735",
-    },
-    {
-      name: "Maria Anders",
-      email: "mariaanders@mail.com",
-      address: "25, rue Lauriston, Paris, France",
-      phone: "(503) 555-9931",
-    },
-    {
-      name: "Fran Wilson",
-      email: "franwilson@mail.com",
-      address: "C/ Araquil, 67, Madrid, Spain",
-      phone: "(204) 619-5731",
-    },
-    {
-      name: "Martin Blank",
-      email: "martinblank@mail.com",
-      address: "Via Monte Bianco 34, Turin, Italy",
-      phone: "(480) 631-2097",
-    },
-  ]);
+  const [employees, setEmployees] = useState([]);
+  const [sortedUsers, setsortedUsers] = useState([]);
+  const [sortedIncompleteUser, setsortedIncompleteUser] = useState([]);
 
   useEffect(() => {
-    setEmployees(JSON.parse(localStorage.getItem("employees")));
+    axios
+      .get("https://medicare-application.herokuapp.com/api/v1/admin/users", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.users);
+        setEmployees(res.data.users);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("employees", JSON.stringify(employees));
-  });
-
-  const sortedEmployees = employees.sort((a, b) => (a.name < b.name ? -1 : 1));
+    const sortedEmployees = employees.sort((a, b) =>
+      a.name < b.name ? -1 : 1
+    );
+    const sortedUsersFn = () => {
+      const sortingUsers = sortedEmployees.filter((user) => !user.isAdmin);
+      setsortedUsers(sortingUsers);
+    };
+    const sortedIncompleteUserFn = () => {
+      const sortingInUsers = sortedUsers.filter(
+        (user) => !user.email || !user.phone
+      );
+      setsortedIncompleteUser(sortingInUsers);
+    };
+    sortedUsersFn();
+    sortedIncompleteUserFn();
+  }, [employees]);
 
   const addEmployee = (name, email, address, phone) => {
     setEmployees([...employees, { id: uuidv4(), name, email, address, phone }]);
   };
 
-  const deleteEmployee = (id) => {
-    setEmployees(employees.filter((employee) => employee.id !== id));
+  const deleteSortedUsers = (id) => {
+    console.log("way to delete", id);
+    const deletingUser = sortedUsers.filter((employee) => employee.id != id);
+    setsortedUsers(deletingUser);
+    console.log(sortedUsers);
+  };
+  const deleteSortedInUsers = (id) => {
+    console.log("way to delete", id);
+    const deletingUser = sortedIncompleteUser.filter(
+      (employee) => employee.id != id
+    );
+    setsortedIncompleteUser(deletingUser);
+    console.log(sortedIncompleteUser);
   };
 
   const updateEmployee = (id, updatedEmployee) => {
@@ -64,7 +71,14 @@ const EmployeeContextProvider = (props) => {
 
   return (
     <EmployeeContext.Provider
-      value={{ sortedEmployees, addEmployee, deleteEmployee, updateEmployee }}
+      value={{
+        sortedIncompleteUser,
+        sortedUsers,
+        addEmployee,
+        deleteSortedUsers,
+        deleteSortedInUsers,
+        updateEmployee,
+      }}
     >
       {props.children}
     </EmployeeContext.Provider>

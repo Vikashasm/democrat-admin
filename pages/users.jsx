@@ -1,20 +1,19 @@
-import React from 'react'
+import React from "react";
 
 import Main from "../components/Main";
 
-import Usercontent from '../components/Usercontent';
+import Usercontent from "../components/Usercontent";
+import EmployeeContextProvider from "../components/context/Employeecontext";
 
 const users = () => {
   return (
-   
-  <>
-   <Main/>
-   <Usercontent/>
-   
-  </>
-   
-   
-  )
-}
+    <>
+      <Main />
+      <EmployeeContextProvider>
+        <Usercontent />
+      </EmployeeContextProvider>
+    </>
+  );
+};
 
-export default users
+export default users;
