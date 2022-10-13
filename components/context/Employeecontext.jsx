@@ -19,7 +19,6 @@ const EmployeeContextProvider = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data.users);
         setEmployees(res.data.users);
       })
       .catch((err) => console.log(err));
@@ -57,12 +56,10 @@ const EmployeeContextProvider = (props) => {
   };
 
   const deleteSortedUsers = (id) => {
-    console.log("way to delete", id);
     const deletingUser = sortedUsers.filter((employee) => employee.id != id);
     setsortedUsers(deletingUser);
   };
   const deleteSortedInUsers = (id) => {
-    console.log("way to delete", id);
     const deletingUser = sortedIncompleteUser.filter(
       (employee) => employee.id != id
     );
