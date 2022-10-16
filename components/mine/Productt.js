@@ -5,11 +5,10 @@ import EditForm from "../EditFrom";
 import Image from "next/image";
 
 const Productt = ({ product }) => {
-  const { deleteProduct } = useContext(ProductContext);
+  const { deleteProduct, approveProduct } = useContext(ProductContext);
   const imgRef = useRef(null);
   const [imgVisible, setimgVisible] = useState(false);
   const [show, setShow] = useState(false);
-
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
@@ -48,27 +47,27 @@ const Productt = ({ product }) => {
           <Button
             variant="primary"
             style={{ width: "80%" }}
-            onClick={() => deleteProduct(product.id)}
+            onClick={() => approveProduct(product._id)}
           >
             Read
           </Button>
         </OverlayTrigger>
       </td>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <EditForm theProduct={product} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close Button
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
+      {
+        //<Modal show={show} onHide={handleClose}>
+        //  <Modal.Header closeButton>
+        //    <Modal.Title>Edit Product</Modal.Title>
+        //  </Modal.Header>
+        //  <Modal.Body>
+        //    <EditForm theProduct={product} />
+        //  </Modal.Body>
+        //  <Modal.Footer>
+        //    <Button variant="secondary" onClick={handleClose}>
+        //      Close Button
+        //    </Button>
+        //  </Modal.Footer>
+        //</Modal>
+      }
       <div
         style={{
           display: imgVisible ? "block" : "none",

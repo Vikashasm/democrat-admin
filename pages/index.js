@@ -4,11 +4,11 @@ import Router from "next/router";
 
 export default function Home() {
   useEffect(() => {
-    Router.push("/dashboard");
+    if (localStorage.getItem("medicareAdmin")) {
+      Router.push("/dashboard");
+    } else {
+      Router.push("/login");
+    }
   }, []);
-  return (
-    <>
-      <Main />
-    </>
-  );
+  return <Main />;
 }

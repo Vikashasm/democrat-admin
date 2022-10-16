@@ -14,8 +14,7 @@ const EmployeeContextProvider = (props) => {
       .get("https://medicare-application.herokuapp.com/api/v1/admin/users", {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
+          token: JSON.parse(localStorage.getItem("medicareAdmin")),
         },
       })
       .then((res) => {
@@ -29,17 +28,19 @@ const EmployeeContextProvider = (props) => {
       a.name < b.name ? -1 : 1
     );
     const sortedUsersFn = () => {
-      const sortingUsers = sortedEmployees.filter((user) => !user.isAdmin);
+      const sortingUsers = sortedEmployees.filter(
+        (user) => !user.isAdmin && user.email && user.phone
+      );
       setsortedUsers(sortingUsers);
     };
     const sortedIncompleteUserFn = () => {
-      const sortingInUsers = sortedUsers.filter(
-        (user) => !user.email || !user.phone
+      const sortingInUsers = sortedEmployees.filter(
+        (user) => (!user.email || !user.phone) && !user.isAdmin
       );
       setsortedIncompleteUser(sortingInUsers);
     };
     const sortedUpdatedUsersFn = () => {
-      if (sortedUsers.length > 1) {
+      if (sortedUsers.length > 0) {
         const sortingUdatedUser = sortedUsers.filter(
           (user) => user.createdAt != user.updatedAt
         );
@@ -55,15 +56,40 @@ const EmployeeContextProvider = (props) => {
     setEmployees([...employees, { id: uuidv4(), name, email, address, phone }]);
   };
 
-  const deleteSortedUsers = (id) => {
-    const deletingUser = sortedUsers.filter((employee) => employee.id != id);
+  const deleteUserReq = async (id) => {
+    return axios
+      .patch(
+        `http://medicare-application.herokuapp.com/api/v1/admin/temporary/delete/user/${id}`,
+        {},
+        {
+          headers: {
+            token: JSON.parse(localStorage.getItem("medicareAdmin")),
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+  const deleteSortedUsers = async (id) => {
+    const deletingUser = sortedUsers.filter((employee) => employee._id != id);
+    const deleteUser = await deleteUserReq(id);
     setsortedUsers(deletingUser);
   };
-  const deleteSortedInUsers = (id) => {
+  const deleteSortedInUsers = async (id) => {
     const deletingUser = sortedIncompleteUser.filter(
-      (employee) => employee.id != id
+      (employee) => employee._id != id
     );
+    const deleteUser = await deleteUserReq(id);
     setsortedIncompleteUser(deletingUser);
+  };
+
+  const approvedUpdatedUser = (id) => {
+    const filteringUpdatedUser = sortedUpdatedUsers.filter(
+      (user) => user._id != id
+    );
+    setsortedUpdatedUsers(filteringUpdatedUser);
   };
 
   const updateEmployee = (id, updatedEmployee) => {
@@ -84,6 +110,7 @@ const EmployeeContextProvider = (props) => {
         deleteSortedUsers,
         deleteSortedInUsers,
         updateEmployee,
+        approvedUpdatedUser,
       }}
     >
       {props.children}

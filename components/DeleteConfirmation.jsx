@@ -13,7 +13,9 @@ const DeleteConfirmation = ({
   return (
     <Modal show={showModal} onHide={hideModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Delete Confirmation</Modal.Title>
+        <Modal.Title>
+          {type == "approval" ? "Approval" : "Delete"} Confirmation
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="alert alert-danger">{message}</div>
@@ -23,7 +25,7 @@ const DeleteConfirmation = ({
           Cancel
         </Button>
         <Button variant="danger" onClick={() => confirmModal(type, ind, id)}>
-          Delete
+          {type == "approval" ? "Approve" : "Delete"}{" "}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { EmployeeContext } from "../components/context/Employeecontext";
 import Employee from "./Employee";
 import AddForm from "./AddForm";
+import UpdatedEmployee from "./UpdatedEmployee";
 import Pagination from "./Pagination";
 
 const UpdatedEmployeeList = () => {
@@ -84,7 +85,7 @@ const UpdatedEmployeeList = () => {
         <tbody>
           {currentEmployees.map((employee, ind) => (
             <tr key={employee.id}>
-              <Employee employee={employee} ind={ind} />
+              <UpdatedEmployee employee={employee} ind={ind} />
             </tr>
           ))}
         </tbody>

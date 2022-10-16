@@ -13,8 +13,7 @@ const DeletedContextProvider = (props) => {
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
+            token: JSON.parse(localStorage.getItem("medicareAdmin")),
           },
         }
       )
@@ -30,11 +29,6 @@ const DeletedContextProvider = (props) => {
   const deleteDeleted = (id) => {
     setDeleteds(deleteds.filter((deleteds) => deleteds.id !== id));
   };
-
-  //const restoreDeleted = (id) => {
-  //  setDeleteds(deleteds.filter((deleteds) => deleteds.id !== id));
-  //};
-
   return (
     <DeletedContext.Provider value={{ sortedDeleteds, deleteDeleted }}>
       {props.children}

@@ -62,6 +62,7 @@ const Deleted = ({ deleted, ind }) => {
     axios
       .put(
         `https://medicare-application.herokuapp.com/api/v1/admin/restore/deleted/user/${deleted._id}`,
+        {},
         {
           headers: {
             token:
@@ -99,7 +100,7 @@ const Deleted = ({ deleted, ind }) => {
 
   return (
     <>
-      <td>{ind} </td>
+      <td>{ind + 1} </td>
       <td>{deleted.id} </td>
       <td>{deleted.reason}</td>
       <td>{date}</td>

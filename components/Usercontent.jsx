@@ -44,33 +44,13 @@ const Usercontent = () => {
   const hideConfirmationModal = () => {
     setDisplayConfirmationModal(false);
   };
-  // handle deleting user request
-
-  const deleteuserReq = () => {
-    axios
-      .put(
-        `http://medicare-application.herokuapp.com/api/v1/admin/temporary/delete/user/${userID}`,
-        {
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFkZjQwMmJjNDYwYmNkNTljZDAwNWUiLCJpZCI6MjEsImVtYWlsIjoibmFpcmFnYXJnOTk5QGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NTIyNTAxOSwiZXhwIjoxNjY3ODE3MDE5fQ.Aa5fgkmYm7O3MwdtdzbpEBxZ6oqFngtbv-6nKN1DWh8",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
 
   // Handle the actual deletion of the item
   const submitDelete = (type, ind, id) => {
     setUserMessage(
       `The Approved User '${sortedUsers[ind].username}' was deleted successfully.`
     );
-    deleteSortedUsers(id);
-    deleteuserReq();
+    deleteSortedUsers(userID);
     setDisplayConfirmationModal(false);
   };
   useEffect(() => {}, [sortedUsers]);
@@ -103,7 +83,7 @@ const Usercontent = () => {
                   {sortedUsers.map((user, ind) => {
                     return (
                       <tr key={user._id}>
-                        <td>{ind}</td>
+                        <td>{ind + 1}</td>
                         <td>{user.username}</td>
                         <td>{user.id}</td>
                         <td>{user.phone}</td>

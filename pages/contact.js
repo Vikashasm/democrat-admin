@@ -1,10 +1,15 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import Router from "next/router";
 import Main from "../components/Main";
 import ContactList from "../components/mine/ContactList";
 import ContactContextProvider from "../components/context/ContactContext";
 
 const contacts = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("medicareAdmin")) {
+      Router.push("/login");
+    }
+  }, []);
   return (
     <>
       <Main />

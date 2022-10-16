@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
+import Router from "next/router";
 import axios from "axios";
 
 const Login = () => {
@@ -20,10 +21,19 @@ const Login = () => {
     const formData = new FormData();
     formData.append("username", uInfo.username);
     formData.append("password", uInfo.password);
-    console.log("njj", uInfo);
+
     axios
-      .post("https://medicare-application.herokuapp.com/api/v1/login", formData)
-      .then((res) => console.log(res))
+      .post("https://medicare-application.herokuapp.com/api/v1/login", uInfo)
+      .then((res) => {
+        if (res.data.success == true) {
+          localStorage.setItem("medicareAdmin", JSON.stringify(res.data.token));
+          localStorage.setItem(
+            "medicareAdminData",
+            JSON.stringify(res.data.user)
+          );
+          Router.push("/dashboard");
+        }
+      })
       .catch((err) => console.log(err));
   };
 
@@ -36,13 +46,10 @@ const Login = () => {
         height: "100vh",
       }}
     >
-      <form
-        encType="multipart/form-data"
-        method="POST"
-        onSubmit={handleaccount}
-      >
-        <div>
+      <form method="POST" onSubmit={handleaccount}>
+        <div style={{ borderRadius: "10px", border: "1px solid blue" }}>
           <input
+            style={{ borderRadius: "10px", border: "1px solid blue" }}
             type="text"
             className="border-2 text-xs p-2 rounded-md bg-zinc-50"
             value={uInfo.username}
@@ -52,8 +59,15 @@ const Login = () => {
           />
         </div>
 
-        <div style={{ marginTop: "5%" }}>
+        <div
+          style={{
+            marginTop: "5%",
+            borderRadius: "10px",
+            border: "1px solid blue",
+          }}
+        >
           <input
+            style={{ borderRadius: "10px", border: "1px solid blue" }}
             type="password"
             placeholder="Password"
             name="password"

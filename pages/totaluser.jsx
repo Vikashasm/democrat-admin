@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import Router from "next/router";
 import Main from "../components/Main";
 import EmployeeList from "../components/EmployeeList";
 import EmployeeContextProvider from "../components/context/Employeecontext";
@@ -7,6 +7,11 @@ import EmployeeContextProvider from "../components/context/Employeecontext";
 import Usercontent from "../components/Usercontent";
 
 const totaluser = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("medicareAdmin")) {
+      Router.push("/login");
+    }
+  }, []);
   return (
     <>
       <Main />

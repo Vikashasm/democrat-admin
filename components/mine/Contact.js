@@ -46,13 +46,13 @@ const Contactt = ({ contact }) => {
         )}
       </td>
 
-      <td>
+      <td style={{ paddingLeft: "2%" }}>
         <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Edit</Tooltip>}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
+            width="25"
+            height="25"
+            fill="green"
             class="bi bi-hand-thumbs-up-fill"
             viewBox="0 0 16 16"
             fontSize="40px"

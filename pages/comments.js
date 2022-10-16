@@ -1,10 +1,15 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import Router from "next/router";
 import Main from "../components/Main";
 import CommentList from "../components/mine/CommentList";
 import CommentContextProvider from "../components/context/CommentContext";
 
 const comments = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("medicareAdmin")) {
+      Router.push("/login");
+    }
+  }, []);
   return (
     <>
       <Main />

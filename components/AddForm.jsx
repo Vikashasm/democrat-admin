@@ -2,40 +2,38 @@ import { Form, Button } from "react-bootstrap";
 
 import { ProductContext } from "../components/context/ProductContext";
 import { useContext, useState } from "react";
-
+import axios from "axios";
 const AddForm = () => {
   const { addProduct } = useContext(ProductContext);
   const [Imgg, setImgg] = useState("");
   const [newProduct, setNewProduct] = useState({
-    productName: "",
-    companyName: "",
-    productForm: "",
+    productName: "asd ",
+    companyName: "sf",
+    productForm: "tablet",
+    productImage: "1.png",
   });
+
+  const formData = new FormData();
   const onInputFile = (e) => {
     e.preventDefault();
-    console.log(e.target.files);
     setImgg(e.target.files[0]);
+    formData.append("file", e.target.files[0]);
   };
   const onInputChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
-  //const { name, email, phone, address } = newEmployee;
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newProduct);
-    addProduct(
-      newProduct.productName,
-      newProduct.companyName,
-      newProduct.productForm,
-      Imgg
-    );
+    const formData = new FormData();
+    formData.append("file", Imgg);
+
+    addProduct(newProduct, formData);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>
+      <Form.Group style={{ marginBottom: "2%" }}>
         <Form.Control
           type="text"
           placeholder="Product Name"
@@ -45,7 +43,7 @@ const AddForm = () => {
           required
         />
       </Form.Group>
-      <Form.Group>
+      <Form.Group style={{ marginBottom: "2%" }}>
         <Form.Control
           type="text"
           placeholder="Company Name"
@@ -55,7 +53,7 @@ const AddForm = () => {
           required
         />
       </Form.Group>
-      <Form.Group>
+      <Form.Group style={{ marginBottom: "2%" }}>
         <Form.Control
           type="text"
           placeholder="product Form"
@@ -65,7 +63,7 @@ const AddForm = () => {
           required
         />
       </Form.Group>
-      <Form.Group>
+      <Form.Group style={{ marginBottom: "4%" }}>
         <Form.Control
           type="file"
           placeholder="Product Image"

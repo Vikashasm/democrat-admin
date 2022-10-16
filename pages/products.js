@@ -1,10 +1,15 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import Router from "next/router";
 import Main from "../components/Main";
 import ProductList from "../components/mine/ProductList";
 import ProductContextProvider from "../components/context/ProductContext";
 
 const products = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("medicareAdmin")) {
+      Router.push("/login");
+    }
+  }, []);
   return (
     <>
       <Main />
