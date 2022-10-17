@@ -53,21 +53,6 @@ const Productt = ({ product }) => {
           </Button>
         </OverlayTrigger>
       </td>
-      {
-        //<Modal show={show} onHide={handleClose}>
-        //  <Modal.Header closeButton>
-        //    <Modal.Title>Edit Product</Modal.Title>
-        //  </Modal.Header>
-        //  <Modal.Body>
-        //    <EditForm theProduct={product} />
-        //  </Modal.Body>
-        //  <Modal.Footer>
-        //    <Button variant="secondary" onClick={handleClose}>
-        //      Close Button
-        //    </Button>
-        //  </Modal.Footer>
-        //</Modal>
-      }
       <div
         style={{
           display: imgVisible ? "block" : "none",

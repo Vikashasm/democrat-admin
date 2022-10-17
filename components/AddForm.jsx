@@ -7,10 +7,10 @@ const AddForm = () => {
   const { addProduct } = useContext(ProductContext);
   const [Imgg, setImgg] = useState("");
   const [newProduct, setNewProduct] = useState({
-    productName: "asd ",
-    companyName: "sf",
-    productForm: "tablet",
-    productImage: "1.png",
+    productName: "",
+    companyName: "",
+    productForm: "",
+    productImage: "",
   });
 
   const formData = new FormData();
