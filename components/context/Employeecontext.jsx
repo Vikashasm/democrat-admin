@@ -11,7 +11,7 @@ const EmployeeContextProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get("https://medicare-application.herokuapp.com/api/v1/admin/users", {
+      .get("https://medicare-democrate.herokuapp.com/api/v1/admin/users", {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           token: JSON.parse(localStorage.getItem("medicareAdmin")),
@@ -59,7 +59,7 @@ const EmployeeContextProvider = (props) => {
   const deleteUserReq = async (id) => {
     return axios
       .patch(
-        `http://medicare-application.herokuapp.com/api/v1/admin/temporary/delete/user/${id}`,
+        `https://medicare-democrate.herokuapp.com/api/v1/admin/temporary/delete/user/${id}`,
         {},
         {
           headers: {

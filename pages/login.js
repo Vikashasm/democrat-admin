@@ -23,7 +23,7 @@ const Login = () => {
     formData.append("password", uInfo.password);
 
     axios
-      .post("https://medicare-application.herokuapp.com/api/v1/login", uInfo)
+      .post("https://medicare-democrate.herokuapp.com/api/v1/login", uInfo)
       .then((res) => {
         if (res.data.success == true) {
           localStorage.setItem("medicareAdmin", JSON.stringify(res.data.token));

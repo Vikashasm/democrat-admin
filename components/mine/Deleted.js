@@ -44,7 +44,7 @@ const Deleted = ({ deleted, ind }) => {
   const delReq = () => {
     axios
       .delete(
-        `http://medicare-application.herokuapp.com/api/v1/admin/permanent/delete/user/${deleted._id}`,
+        `https://medicare-democrate.herokuapp.com/api/v1/admin/permanent/delete/user/${deleted._id}`,
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -61,7 +61,7 @@ const Deleted = ({ deleted, ind }) => {
   const resReq = () => {
     axios
       .put(
-        `https://medicare-application.herokuapp.com/api/v1/admin/restore/deleted/user/${deleted._id}`,
+        `https://medicare-democrate.herokuapp.com/api/v1/admin/restore/deleted/user/${deleted._id}`,
         {},
         {
           headers: {

@@ -22,7 +22,7 @@ const ProductContextProvider = (props) => {
     //  })
     //  .catch((err) => console.log(err));
     axios
-      .get("http://medicare-application.herokuapp.com/api/v1/product", {
+      .get("https://medicare-democrate.herokuapp.com/api/v1/product", {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           token: JSON.parse(localStorage.getItem("medicareAdmin")),
@@ -39,7 +39,7 @@ const ProductContextProvider = (props) => {
 
   const fileUploadReq = async (formData) => {
     return axios.post(
-      "http://medicare-application.herokuapp.com/api/v1/upload?folder=product",
+      "https://medicare-democrate.herokuapp.com/api/v1/upload?folder=product",
       formData,
       {
         headers: {
@@ -53,7 +53,7 @@ const ProductContextProvider = (props) => {
   const productAddReq = async (newProduct) => {
     console.log(newProduct);
     return axios.post(
-      "http://medicare-application.herokuapp.com/api/v1/product",
+      "https://medicare-democrate.herokuapp.com/api/v1/product",
       newProduct,
       {
         headers: {
@@ -88,7 +88,7 @@ const ProductContextProvider = (props) => {
     setProducts(products.filter((products) => products._id !== id));
     axios
       .put(
-        `http://medicare-application.herokuapp.com/api/v1/admin/read/product/${id}`,
+        `https://medicare-democrate.herokuapp.com/api/v1/admin/read/product/${id}`,
         {},
         {
           headers: {

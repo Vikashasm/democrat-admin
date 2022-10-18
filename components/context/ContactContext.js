@@ -9,7 +9,7 @@ const ContactContextProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get("https://medicare-application.herokuapp.com/api/v1/admin/contacts", {
+      .get("https://medicare-democrate.herokuapp.com/api/v1/admin/contacts", {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           token: JSON.parse(localStorage.getItem("medicareAdmin")),

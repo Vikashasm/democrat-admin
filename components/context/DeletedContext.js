@@ -9,7 +9,7 @@ const DeletedContextProvider = (props) => {
   useEffect(() => {
     axios
       .get(
-        "http://medicare-application.herokuapp.com/api/v1/admin/deleted/users",
+        "https://medicare-democrate.herokuapp.com/api/v1/admin/deleted/users",
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
